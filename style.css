@@ -1,25 +1,70 @@
 :root{
-    --accent:#ff6b6b;
+    --accent:#ff6b6b; /* primary accent */
+    --accent-2:#5b8def; /* secondary accent */
+    --accent-3:#34c59f; /* success/green */
     --muted:#6b7280;
     --bg:#f7fafc;
+    --card:#ffffff;
+    --text:#0b1220;
+    --nav-bg:#ffffffcc;
     --container:1100px;
 }
 
 *{box-sizing:border-box}
-body{font-family:Inter,Segoe UI,Arial,Helvetica,sans-serif;margin:0;color:#0b1220;background:var(--bg);line-height:1.5}
+/* Slightly larger base font for improved readability */
+body{font-family:Inter,Segoe UI,Arial,Helvetica,sans-serif;margin:0;color:#0b1220;background:var(--bg);line-height:1.5;font-size:18px}
 .container{max-width:var(--container);margin:0 auto;padding:0 20px}
 
 .site-header{background:#fff;box-shadow:0 1px 6px rgba(11,18,32,0.06);position:sticky;top:0;z-index:30}
 .header-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
-.brand{font-weight:700;color:var(--accent);text-decoration:none;font-size:20px}
-.main-nav a{margin-left:18px;color:#111;text-decoration:none}
-.main-nav a:hover{opacity:0.85}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--accent);text-decoration:none;font-size:20px}
+.logo{height:44px;width:auto;display:block}
+.brand-text{font-weight:700;color:var(--accent);font-size:20px}
+
+/* Hero-specific header variant (transparent over the hero) */
+.hero-header{background:transparent;position:absolute;left:0;right:0;top:0;box-shadow:none}
+.hero-header .brand-text,.hero-header .main-nav a{color:#fff}
+
+/* Make hero full screen */
+.hero{padding:0;position:relative;overflow:hidden}
+.hero-inner{display:flex;gap:36px;align-items:center;min-height:100vh;padding:48px 0}
+.hero-media{flex:1;height:100vh;background-size:cover;background-position:center;border-radius:0}
+.hero-content{flex:1;max-width:620px;padding:48px;color:#fff;z-index:2}
+.hero::after{content:'';position:absolute;left:0;right:0;top:0;height:100vh;background:linear-gradient(180deg, rgba(6,9,20,0.45), rgba(6,9,20,0.12));pointer-events:none}
+
+/* Most visited overlay - uses CSS transform for appearance */
+.most-visited{position:absolute;left:50%;transform:translateX(-50%) translateY(24px);bottom:36px;display:flex;gap:14px;z-index:3;padding:6px}
+.mv-card{width:170px;height:110px;border-radius:12px;background-size:cover;background-position:center;box-shadow:0 10px 30px rgba(6,9,20,0.25);overflow:hidden;transform:translateY(26px) scale(.95);opacity:0;display:flex;align-items:flex-end}
+.mv-body{background:linear-gradient(180deg,transparent,rgba(0,0,0,0.44));color:#fff;padding:10px;width:100%}
+.mv-body strong{display:block}
+
+/* animation using transform */
+@keyframes mvSlideUp{
+    from{transform:translateY(26px) scale(.95);opacity:0}
+    to{transform:translateY(0) scale(1);opacity:1}
+}
+.mv-card{animation:mvSlideUp .5s cubic-bezier(.2,.9,.2,1) forwards}
+.mv-card:nth-child(1){animation-delay:.12s}
+.mv-card:nth-child(2){animation-delay:.24s}
+.mv-card:nth-child(3){animation-delay:.36s}
+.mv-card:nth-child(4){animation-delay:.48s}
+
+/* slightly smaller on mobile */
+@media (max-width:700px){
+    .most-visited{flex-wrap:wrap;left:50%;transform:translateX(-50%) translateY(10px);bottom:18px}
+    .mv-card{width:140px;height:92px}
+    .hero-inner{padding:28px 0}
+    .hero-content{padding:26px}
+}
+.main-nav a{margin-left:18px;color:var(--text);text-decoration:none;padding:6px 8px;border-radius:8px}
+.main-nav a:hover{background:var(--nav-bg)}
+.main-nav a.cta{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;padding:8px 12px}
 
 .hero{padding:48px 0}
 .hero-inner{display:flex;gap:36px;align-items:center}
 .hero-content{flex:1}
 .hero-media{flex:1;height:320px;background-size:cover;background-position:center;border-radius:12px}
-.hero h1{font-size:34px;margin:0 0 12px}
+.hero h1{font-size:44px;margin:0 0 12px}
 .hero p{color:var(--muted);margin:0 0 18px}
 .search-form{display:flex;gap:8px}
 .search-form input{flex:1;padding:12px 14px;border-radius:10px;border:1px solid #e5e7eb}
@@ -28,12 +73,25 @@ body{font-family:Inter,Segoe UI,Arial,Helvetica,sans-serif;margin:0;color:#0b122
 .cards{padding:40px 0}
 .cards h2{margin:0 0 18px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
-.card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 6px 18px rgba(11,18,32,0.06);display:flex;flex-direction:column}
+.card{background:var(--card);border-radius:12px;overflow:hidden;box-shadow:0 8px 28px rgba(11,18,32,0.06);display:flex;flex-direction:column;transition:transform .22s ease,box-shadow .22s ease}
+.card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(11,18,32,0.12)}
 .card-image{height:160px;background-size:cover;background-position:center}
 .card-body{padding:16px}
-.card-body h3{margin:0 0 8px}
-.card-body p{margin:0 0 12px;color:var(--muted);font-size:14px}
-.btn{display:inline-block;background:#111;color:#fff;padding:8px 12px;border-radius:8px;text-decoration:none}
+.card-body h3{margin:0 0 8px;font-size:20px}
+.card-body p{margin:0 0 12px;color:var(--muted);font-size:15px}
+.btn{display:inline-block;background:#111;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none;font-size:15px}
+
+.badge{display:inline-block;background:linear-gradient(90deg,var(--accent-2),var(--accent));color:#fff;padding:6px 10px;border-radius:999px;font-size:12px;margin-bottom:8px}
+
+.btn.alt{background:transparent;color:var(--accent-2);border:1px solid rgba(91,141,239,0.14)}
+
+.feature h3{color:var(--accent-2);font-size:20px}
+
+.hero h1{color:var(--text)}
+
+/* small visual polish for footer links */
+.footer-nav a{transition:color .15s ease}
+.footer-nav a:hover{color:var(--accent-2)}
 
 .features{padding:32px 0}
 .feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px}
@@ -47,11 +105,11 @@ body{font-family:Inter,Segoe UI,Arial,Helvetica,sans-serif;margin:0;color:#0b122
 
 .auth{display:flex;justify-content:center;padding:48px 0}
 .auth-card{width:100%;max-width:420px;background:#fff;padding:24px;border-radius:12px;box-shadow:0 10px 30px rgba(11,18,32,0.06)}
-.auth-card h2{margin-top:0}
+.auth-card h2{margin-top:0;font-size:22px}
 .auth-card label{display:block;margin:12px 0}
 .auth-card input{width:100%;padding:10px;border-radius:8px;border:1px solid #e5e7eb}
-.btn-block{width:100%;padding:12px}
-.muted{color:var(--muted);font-size:14px}
+.btn-block{width:100%;padding:14px;font-size:15px}
+.muted{color:var(--muted);font-size:15px}
 
 .dashboard{display:flex;gap:20px;padding:32px 0}
 .sidebar{width:220px}
