@@ -1,33 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Explorer</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header>
-        <div style="display: flex;">
-        <!--logo-->
-       <div>
-        <img src="explorerlogo.png" alt="logo" height="100px" width="100px">
-       </div>
-        <!--company name-->
-        <div style="padding-top: 30px; display: flex">
-         <div>
-            <span style="font-size: 32px; font-weight: bold; ">Travel Explorer</span>
-         </div>
-         <!--search bar-->
-         <div>
-            <form style="padding-left: 20px;padding-bottom: 20px;">
-            <input type="text" placeholder="Search your destination" style="width: 300px; height: 30px; border-radius: 40px; border: 1px solid gray; padding-left: 10px;">
-        </form>
-         </div>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>Travel Explorer — Home</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container header-inner">
+                <a class="brand" href="index.html">Travel Explorer</a>
+                <nav class="main-nav">
+                    <a href="index.html">Home</a>
+                    <a href="#destinations">Destinations</a>
+                    <a href="register.html">Register</a>
+                    <a href="login.html">Login</a>
+                    <a href="dashboard.html">Dashboard</a>
+                </nav>
+            </div>
+        </header>
 
-    </div>
-    </div>
-    </header>
-    
-</body>
+        <section class="hero">
+            <div class="container hero-inner">
+                <div class="hero-content">
+                    <h1>Find your next great escape</h1>
+                    <p>Hand-picked trips and flexible plans — explore beautiful destinations.</p>
+                    <form class="search-form" action="#">
+                        <input type="text" placeholder="Search destinations, e.g. Bali, Paris, Tokyo" aria-label="Search destinations" />
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
+                <div class="hero-media" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80')"></div>
+            </div>
+        </section>
+
+        <main class="container">
+            <section id="destinations" class="cards">
+                <h2>Popular Destinations</h2>
+                <div class="grid">
+                    <article class="card">
+                        <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80')"></div>
+                        <div class="card-body">
+                            <h3>Bali, Indonesia</h3>
+                            <p>Beaches, temples, and rice terraces — ideal for relaxation.</p>
+                            <a class="btn" href="#">View</a>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=80')"></div>
+                        <div class="card-body">
+                            <h3>Paris, France</h3>
+                            <p>Art, cafes, and iconic architecture for a romantic city break.</p>
+                            <a class="btn" href="#">View</a>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-image" style="background-image:url('https://images.unsplash.com/photo-1505765050526-6c8a5b9f6b5a?auto=format&fit=crop&w=1200&q=80')"></div>
+                        <div class="card-body">
+                            <h3>Maldives</h3>
+                            <p>Overwater bungalows and turquoise waters for the ultimate escape.</p>
+                            <a class="btn" href="#">View</a>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="features">
+                <h2>Why travel with us</h2>
+                <div class="feature-grid">
+                    <div class="feature">
+                        <h3>Local Experts</h3>
+                        <p>We partner with local guides for authentic experiences.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Flexible Booking</h3>
+                        <p>Change plans easily with our flexible policies.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Secure Payments</h3>
+                        <p>Safe checkout and transparent pricing.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container footer-inner">
+                <p>&copy; 2025 Travel Explorer</p>
+                <nav class="footer-nav">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                </nav>
+            </div>
+        </footer>
+    </body>
 </html>
